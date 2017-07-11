@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html ng-app>
-<head>
-    <meta charset="utf-8">
-    <title>ToDoList</title>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
-    <script type="text/javascript" src="js/controllers.js"></script>
-</head>
-<body ng-controller="TodoCrtlUpdate">
-<h1>Todo List</h1>
-<form ng-submit="addItem()">
-    <input type="text" ng-model="newItem" name="newItem" />
-    <input type="submit" id="submit" value="ToDo" />
-</form>
-<ul id="todo">
-    <li ng-repeat="item in todoList | filter:{isFinish:false}">
-        <div ng-hide="item.editing"><input type="checkbox" ng-click="removeItem(item)"><span ng-dblclick="edit(item)">{{item.label }}</span></div>
-        <div ng-show="item.editing"><input type="text" value="{{item.label }}" ng-model="item.label"><button ng-click="save(item)">儲存</button></div>
+  <head>
+      <meta charset="utf-8">
+      <title>ToDoList</title>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+      <script type="text/javascript" src="js/controllers.js"></script>
+  </head>
+  <body ng-controller="TodoCrtl">
+    <h1>Todo List</h1>
+    <form ng-submit="addItem()">
+        <input type="text" ng-model="newItem" name="newItem" />
+        <button type="submit" id="submit">Add Todos</button>
+    </form>
+    <ul id="todo">
+        <li ng-repeat="item in todoList | filter:{isFinish:false}">
+            <div ng-hide="item.editing"><input type="checkbox" ng-click="removeItem(item)"><span ng-dblclick="edit(item)">{{item.label }}</span></div>
+            <div ng-show="item.editing"><input type="text" value="{{item.label }}" ng-model="item.label"></div>
 
-    </li>
-</ul>
+        </li>
+    </ul>
 
-<hr>
+    <hr>
 
-<h1>Complete!</h1>
-<ul id="finish">
-    <li ng-repeat="item in todoList | filter:{isFinish:true}">
-        <input type="checkbox" ng-click="putBackItem(item)">
-        {{item.label}}
-    </li>
-</ul>
-</body>
-</html>  
+    <h1>Complete!</h1>
+    <ul id="finish">
+        <li ng-repeat="item in todoList | filter:{isFinish:true}">
+            <input type="checkbox" ng-click="putBackItem(item)">
+            <label style="text-decoration: line-through;">
+              {{item.label}}
+            </label>
+        </li>
+    </ul>
+  </body>
+</html>
